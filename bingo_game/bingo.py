@@ -3,6 +3,7 @@ import random
 
 VERSION = 1.2
 
+# 화면 정리 함수
 def clearScreen():
     command = 'clear'
     if os.name in ('nt', 'dos'):
@@ -21,7 +22,7 @@ def run():
 
         if sel_menu == 1:
             # PvE
-            print('컴퓨터랑 합니다.')
+            print('컴퓨터 대전')
             
             try:
                 num_block = int(input('칸 수를 입력해 주세요(최소 3개 이상) > ')) # 빙고 칸 수 입력
@@ -42,7 +43,7 @@ def run():
 
         elif sel_menu == 2:
             # PvP | 미구현(네트워크 공부 후 개발 예정)
-            print('유저랑 합니다.')
+            print('유저 대전')
 
         elif sel_menu == 3:
             # 게임 종료
@@ -59,11 +60,11 @@ def run():
 # 메뉴 불러오기 함수
 def setMenu():
     str_menu = (f'빙고 ver.{VERSION}\n'
-                '1. 컴퓨터랑 하기\n'
-                '2. 유저랑하기\n'
+                '1. 컴퓨터 대전\n'
+                '2. 유저 대전\n'
                 '3. 게임종료\n')
     print(str_menu)
-    try:
+    try: # 정수 외 다른 형 입력 시 예외처리
         sel_menu = int(input('메뉴번호 입력 : '))
     except ValueError as e:
         return 0
@@ -72,7 +73,7 @@ def setMenu():
 # 빙고 세팅 함수
 def set_bingo(num_block: int):
     lst_first = random.sample([i for i in range(1, (num_block**2) + (num_block + 1))], k=num_block**2) # 랜덤 번호 불러오기
-    # random.shuffle(lst_first)
+    
     lst_bingo = []
     # 불러온 번호 2중 배열로 집어넣기
     for i in range(num_block):
@@ -107,20 +108,21 @@ def PvE_game(my_bingo : list, com_bingo : list, num_block : int):
                 input()
                 continue
 
-        except ValueError as e:
-            print('제거할 숫자를 정확히 입력해 주세요.') # 문자, 소숫점 등 잘못 입력
+        except ValueError as e: # 문자, 소숫점 등 잘못 입력
+            print('제거할 숫자를 정확히 입력해 주세요.')
             input()
             continue
         
         clearScreen()
+
         # 컴퓨터 턴
         com_choose(my_bingo, com_bingo)
         
-        # 빙고가 됐는지 확인하기
+        # 빙고가 맞춰졌는지 확인하기
         user = check_bingo(my_bingo)
         com = check_bingo(com_bingo)
 
-        # 빙고가 다 맞춰졌을 때 결과
+        # 빙고가 다 맞춰졌을 때 결과 출력
         if (user == True) and (com == True):
             print('비겼습니다.')
             print('Me')
@@ -154,13 +156,13 @@ def catch_bingo(bingo : list, num : int):
 
 # 빙고가 됐는지 확인하는 함수
 def check_bingo(bingo: list):
-    if row_bingo(bingo):
+    if row_bingo(bingo): # 가로
         return True
-    elif col_bingo(bingo):
+    elif col_bingo(bingo): # 세로
         return True
-    elif left_cross(bingo):
+    elif left_cross(bingo): # 왼쪽 대각선
         return True
-    elif right_cross(bingo):
+    elif right_cross(bingo): # 오른쪽 대각선
         return True
     else:
         return False
@@ -190,17 +192,15 @@ def col_bingo(bingo: list):
 # 왼쪽 대각선 빙고 확인 함수
 def left_cross(bingo: list):
     for i in range(len(bingo)):
-        for j in range(len(bingo)):
-            if (i == j) and bingo[i][j] != 0:
-                return False
+        if bingo[i][i] != 0:
+            return False
     return True
 
 # 오른쪽 대각선 빙고 확인 함수
 def right_cross(bingo: list):
     for i in range(len(bingo)):
-        for j in range(len(bingo)):
-            if ((len(bingo) - (i + 1)) == j) and bingo[i][j] != 0:
-                return False
+        if bingo[i][len(bingo) - (i + 1)] != 0:
+            return False
     return True
 
 # 컴퓨터 숫자 고르기 함수
@@ -210,8 +210,8 @@ def com_choose(my_bingo, com_bingo):
         lst_com.remove(0)
 
     num = random.choice(lst_com)
-    catch_bingo(my_bingo, num) # 번호 지우기 함수
-    catch_bingo(com_bingo, num)
+    catch_bingo(my_bingo, num) # 내 번호 지우기
+    catch_bingo(com_bingo, num) # 컴퓨터 번호 지우기
     input('컴퓨터가 숫자를 골랐습니다.\n'
           'Enter를 눌러 주세요.')
     clearScreen()
@@ -219,9 +219,9 @@ def com_choose(my_bingo, com_bingo):
 # 빙고판 보기 함수
 def result(bingo):
     for i in bingo:
-            for j in range((len(bingo))):
-                print(f'{i[j]:4d}', end=' ')
-            print('\n')
+        for j in range((len(bingo))):
+            print(f'{i[j]:4d}', end=' ')
+        print('\n')
 
 # 메인 함수
 if __name__ == '__main__':
