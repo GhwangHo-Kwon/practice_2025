@@ -208,7 +208,7 @@ class bingo():
         self.num = random.choice(self.lst_com)
         self.catch_bingo(my_bingo, self.num) # 내 번호 지우기
         self.catch_bingo(com_bingo, self.num) # 컴퓨터 번호 지우기
-        input('컴퓨터가 숫자를 골랐습니다.\n'
+        input(f'컴퓨터가 숫자{self.num}를(을) 골랐습니다.\n'
             'Enter를 눌러 주세요.')
         self.clearScreen()
 
