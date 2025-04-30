@@ -38,6 +38,13 @@
             TxtPW_R = new TextBox();
             BtnJoin = new Button();
             BtnCancel = new Button();
+            label4 = new Label();
+            RbtMan = new RadioButton();
+            RbnWoman = new RadioButton();
+            label5 = new Label();
+            DtpBirth = new DateTimePicker();
+            label6 = new Label();
+            textBox1 = new TextBox();
             SuspendLayout();
             // 
             // label1
@@ -55,6 +62,7 @@
             TxtID.Name = "TxtID";
             TxtID.Size = new Size(164, 23);
             TxtID.TabIndex = 1;
+            TxtID.TextChanged += TxtID_TextChanged;
             // 
             // ChkID
             // 
@@ -81,6 +89,7 @@
             TxtPW.Name = "TxtPW";
             TxtPW.Size = new Size(164, 23);
             TxtPW.TabIndex = 2;
+            TxtPW.TextChanged += TxtPW_TextChanged;
             // 
             // ChkPW
             // 
@@ -107,6 +116,7 @@
             TxtPW_R.Name = "TxtPW_R";
             TxtPW_R.Size = new Size(164, 23);
             TxtPW_R.TabIndex = 3;
+            TxtPW_R.TextChanged += TxtPW_R_TextChanged;
             // 
             // BtnJoin
             // 
@@ -128,18 +138,89 @@
             BtnCancel.UseVisualStyleBackColor = true;
             BtnCancel.Click += BtnCancel_Click;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(64, 145);
+            label4.Name = "label4";
+            label4.Size = new Size(42, 15);
+            label4.TabIndex = 0;
+            label4.Text = "성별 : ";
+            // 
+            // RbtMan
+            // 
+            RbtMan.AutoSize = true;
+            RbtMan.Checked = true;
+            RbtMan.Location = new Point(121, 143);
+            RbtMan.Name = "RbtMan";
+            RbtMan.Size = new Size(49, 19);
+            RbtMan.TabIndex = 4;
+            RbtMan.TabStop = true;
+            RbtMan.Text = "남자";
+            RbtMan.UseVisualStyleBackColor = true;
+            // 
+            // RbnWoman
+            // 
+            RbnWoman.AutoSize = true;
+            RbnWoman.Location = new Point(204, 143);
+            RbnWoman.Name = "RbnWoman";
+            RbnWoman.Size = new Size(49, 19);
+            RbnWoman.TabIndex = 4;
+            RbnWoman.Text = "여자";
+            RbnWoman.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(40, 183);
+            label5.Name = "label5";
+            label5.Size = new Size(66, 15);
+            label5.TabIndex = 0;
+            label5.Text = "생년월일 : ";
+            // 
+            // DtpBirth
+            // 
+            DtpBirth.Location = new Point(112, 177);
+            DtpBirth.Name = "DtpBirth";
+            DtpBirth.Size = new Size(164, 23);
+            DtpBirth.TabIndex = 5;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(40, 226);
+            label6.Name = "label6";
+            label6.Size = new Size(66, 15);
+            label6.TabIndex = 0;
+            label6.Text = "전화번호 : ";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(112, 223);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(164, 23);
+            textBox1.TabIndex = 2;
+            textBox1.TextChanged += TxtPW_TextChanged;
+            // 
             // Join
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(334, 411);
+            Controls.Add(DtpBirth);
+            Controls.Add(RbnWoman);
+            Controls.Add(RbtMan);
             Controls.Add(BtnCancel);
             Controls.Add(BtnJoin);
             Controls.Add(ChkPW);
             Controls.Add(ChkID);
             Controls.Add(TxtPW_R);
             Controls.Add(label3);
+            Controls.Add(textBox1);
             Controls.Add(TxtPW);
+            Controls.Add(label4);
+            Controls.Add(label6);
+            Controls.Add(label5);
             Controls.Add(label2);
             Controls.Add(TxtID);
             Controls.Add(label1);
@@ -164,5 +245,12 @@
         private TextBox TxtPW_R;
         private Button BtnJoin;
         private Button BtnCancel;
+        private Label label4;
+        private RadioButton RbtMan;
+        private RadioButton RbnWoman;
+        private Label label5;
+        private DateTimePicker DtpBirth;
+        private Label label6;
+        private TextBox textBox1;
     }
 }
